@@ -9,7 +9,7 @@
 //   http://creativecommons.org/licenses/by-nc-sa/4.0/
 //
 
-package hu.hgj.improvedproperties;
+package hu.hgj.improvedconfiguration;
 
 import java.io.BufferedReader;
 import java.io.File;
