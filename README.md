@@ -5,6 +5,10 @@ Properties, but enhanced with dot separated key names and file inclusion.
 
 # Changes
 
+## 1.1.0
+
+* Refactored getSubset() and getPrefix() methods
+
 ## 1.0.2
 
 * Fixed #3
