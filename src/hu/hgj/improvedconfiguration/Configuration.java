@@ -43,9 +43,9 @@ public class Configuration implements Cloneable {
 	}
 
 	/**
-	 * Wrap around the given {@link HashMap<String, String>} with a {@link
+	 * Wrap around the given {@link HashMap} with a {@link
 	 * Configuration} object.
-	 * @param entries The {@link HashMap<String, String>} to wrap around.
+	 * @param entries The {@link HashMap} to wrap around.
 	 */
 	public Configuration(HashMap<String, String> entries) {
 		this.entries = entries;
