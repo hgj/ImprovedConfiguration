@@ -27,6 +27,9 @@ import java.util.regex.Pattern;
  */
 public class ConfigurationParser {
 
+	private static Pattern keyValuePattern = Pattern.compile("\\s*(.*?)\\s*=\\s*(\"(?<I1>.*)\"|'(?<I2>.*)'|(?<I3>.*))\\s*");
+	private static Pattern includePattern = Pattern.compile("\\s*include\\s*(\"(?<I1>.*)\"|'(?<I2>.*)'|(?<I3>.*))\\s*");
+
 	private static HashSet<String> includedFiles = new HashSet<>();
 
 	public static Configuration loadConfiguration(File file) throws IOException {
@@ -55,8 +58,8 @@ public class ConfigurationParser {
 				continue;
 			}
 			// The line should be 'key = value' or 'include file' format
-			if (line.matches(".*=.*")) {
-				Matcher keyValueMatcher = Pattern.compile("\\s*(.*?)\\s*=\\s*(\"(?<I1>.*)\"|'(?<I2>.*)'|(?<I3>.*))").matcher(line);
+			if (line.matches(".+=.+")) {
+				Matcher keyValueMatcher = keyValuePattern.matcher(line);
 				if (keyValueMatcher.matches()) {
 					String key = keyValueMatcher.group(1);
 					String value = null;
@@ -68,13 +71,13 @@ public class ConfigurationParser {
 					}
 					if (value != null) {
 						if (!key.isEmpty() && !value.isEmpty()) {
-							configuration.set(key, value);
+							configuration.set(key, value.trim());
 							continue;
 						}
 					}
 				}
-			} else if (line.matches(".*include.*")) {
-				Matcher includeFileMatcher = Pattern.compile("\\s*include\\s*(\"(?<I1>.*)\"|'(?<I2>.*)'|(?<I3>.*))").matcher(line);
+			} else if (line.matches("\\s*include.+")) {
+				Matcher includeFileMatcher = includePattern.matcher(line);
 				if (includeFileMatcher.matches()) {
 					String fileName = null;
 					for (String name : Arrays.asList("I1", "I2", "I3")) {
@@ -85,6 +88,7 @@ public class ConfigurationParser {
 					}
 					File filePath = null;
 					if (fileName != null) {
+						fileName = fileName.trim();
 						filePath = new File(fileName);
 						if (!filePath.isAbsolute()) {
 							filePath = new File((new File(file.getAbsolutePath())).getParent() + File.separator + fileName);
