@@ -294,7 +294,9 @@ public class Configuration implements Cloneable {
 	 * object.
 	 */
 	public Configuration getSubset(String prefix) {
-		return new Configuration(getSubsetEntries(prefix));
+		Configuration configuration = new Configuration(getSubsetEntries(prefix));
+		configuration.setPrefix(prefix);
+		return configuration;
 	}
 
 	@SuppressWarnings("unchecked")
