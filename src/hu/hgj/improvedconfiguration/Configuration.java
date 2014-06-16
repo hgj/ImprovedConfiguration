@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A Configuration object is a wrapper to a {@link HashMap<String, String>}.
+ * A Configuration object is a wrapper to a String -> String {@link HashMap}.
  * <p/>
  * If you want to create a new Configuration that should be independent from
  * it's source (with the help of {@link #getMatching(String)} or {@link
