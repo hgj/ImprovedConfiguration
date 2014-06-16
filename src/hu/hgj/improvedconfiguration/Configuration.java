@@ -240,9 +240,10 @@ public class Configuration implements Cloneable {
 	 * Return a subset of the configuration entries which keys match the given
 	 * regexp pattern.
 	 * @param pattern The regexp pattern to match the keys.
-	 * @return The matched configuration entries.
+	 * @return The matched configuration entries in a new {@link
+	 * java.util.HashMap}.
 	 */
-	public HashMap<String, String> getMatching(String pattern) {
+	public HashMap<String, String> getMatchingEntries(String pattern) {
 		if (pattern.isEmpty()) {
 			return null;
 		}
@@ -256,14 +257,25 @@ public class Configuration implements Cloneable {
 	}
 
 	/**
-	 * Return a subset of the configuration entries which keys match the given
-	 * prefix.
-	 * @param prefix The prefix to match the keys.
-	 * @return The matched configuration entries.
+	 * Does the same as {@link #getMatchingEntries(String)}, but returns a new
+	 * {@link Configuration} instead of just the {@link java.util.HashMap}.
+	 * @param pattern The regexp pattern to match the keys.
+	 * @return The matched configuration entries in a new {@link Configuration}
+	 * object.
 	 */
-	public Configuration getSubset(String prefix) {
+	public Configuration getMatching(String pattern) {
+		return new Configuration(getMatchingEntries(pattern));
+	}
+
+	/**
+	 * Return a subset of the configuration entries which keys match the given
+	 * prefix in a {@link java.util.HashMap}.
+	 * @param prefix The prefix to match the keys.
+	 * @return The matched configuration entries in a {@link java.util.HashMap}.
+	 */
+	public HashMap<String, String> getSubsetEntries(String prefix) {
 		if (prefix.isEmpty()) {
-			return this;
+			return entries;
 		}
 		HashMap<String, String> matchingEntries = new HashMap<>();
 		for (Map.Entry<String, String> entry : entries.entrySet()) {
@@ -271,7 +283,18 @@ public class Configuration implements Cloneable {
 				matchingEntries.put(entry.getKey(), entry.getValue());
 			}
 		}
-		return new Configuration(matchingEntries);
+		return matchingEntries;
+	}
+
+	/**
+	 * Does the same as {@link #getSubsetEntries(String)}, but returns a new
+	 * {@link Configuration} instead of just the {@link java.util.HashMap}.
+	 * @param prefix The prefix to match the keys.
+	 * @return The matched configuration entries in a new {@link Configuration}
+	 * object.
+	 */
+	public Configuration getSubset(String prefix) {
+		return new Configuration(getSubsetEntries(prefix));
 	}
 
 	@SuppressWarnings("unchecked")
