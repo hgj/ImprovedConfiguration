@@ -17,7 +17,7 @@ public class FileTests {
 	public void InvalidFileTest() {
 		Configuration configuration = null;
 		try {
-			ConfigurationParser.loadConfiguration(new File("foobarbaz"));
+			configuration = ConfigurationParser.loadConfiguration(new File("foobarbaz"));
 		} catch (IOException e) {
 			// Nothing
 		}
