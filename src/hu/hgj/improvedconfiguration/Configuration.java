@@ -178,7 +178,7 @@ public class Configuration implements Cloneable {
 
 	/**
 	 * Retrieves and converts the {@code value} to {@link Integer}. The
-	 * conversion is done with a simple {@link Integer#parseInt(java.lang.String)}.
+	 * conversion is done with a simple {@link Integer#parseInt(String)}.
 	 * @param key The key to get.
 	 * @return The {@code} decimal value of the key.
 	 */
@@ -197,7 +197,7 @@ public class Configuration implements Cloneable {
 	 * accordingly.
 	 * @param key The key to get.
 	 * @param dictionary The translation dictionary.
-	 * @param useRegexp Use {@link String#matches(java.lang.String)} with the
+	 * @param useRegexp Use {@link String#matches(String)} with the
 	 * dictionary keys.
 	 * @return Returns the translated {@code value} or the original or {@code
 	 * null}.
@@ -225,6 +225,36 @@ public class Configuration implements Cloneable {
 				}
 			}
 			return integerValue;
+		}
+	}
+
+	/**
+	 * Retrieves and converts the {@code value} to {@link Float}. The
+	 * conversion is done with a simple {@link Float#parseFloat(String)}.
+	 * @param key The key to get.
+	 * @return The {@code} floating point value of the key.
+	 */
+	public Float getFloat(String key) {
+		String value = entries.get(prefix + key);
+		if (value != null) {
+			return Float.parseFloat(value.trim());
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Retrieves and converts the {@code value} to {@link Double}. The
+	 * conversion is done with a simple {@link Double#parseDouble(String)}.
+	 * @param key The key to get.
+	 * @return The {@code} double value of the key.
+	 */
+	public Double getDouble(String key) {
+		String value = entries.get(prefix + key);
+		if (value != null) {
+			return Double.parseDouble(value.trim());
+		} else {
+			return null;
 		}
 	}
 

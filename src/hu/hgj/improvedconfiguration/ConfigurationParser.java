@@ -13,7 +13,6 @@ package hu.hgj.improvedconfiguration;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -40,7 +39,7 @@ public class ConfigurationParser {
 		return configuration;
 	}
 
-	private static void parseConfiguration(Configuration configuration, File file) throws FileNotFoundException, IOException {
+	private static void parseConfiguration(Configuration configuration, File file) throws IOException {
 		if (includedFiles.contains(file.getAbsolutePath())) {
 			// TODO: Logger support
 			//System.err.println("WARNING: Already included '" + file.getAbsolutePath() + "', skipping.");
@@ -52,6 +51,7 @@ public class ConfigurationParser {
 			// Trim the line
 			String line = originalLine.trim();
 			// Remove comments
+			// TODO: Ability to escape hashmark
 			line = line.replaceAll("#.*", "");
 			// Drop if empty
 			if (line.isEmpty()) {
