@@ -5,6 +5,8 @@ Properties, but enhanced with dot separated key names and file inclusion.
 
 # Changes
 
+- 1.1.2
+	* Added support for parsing floats and doubles
 - 1.1.1
 	* getSubset() now sets the prefix for the new Configuration object
 - 1.1.0
